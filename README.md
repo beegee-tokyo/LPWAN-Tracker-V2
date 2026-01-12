@@ -134,7 +134,6 @@ The different LPP channels are assigned like this:
 | Gas resistance     | 6         | 2          | 2 bytes  | in kOhm, can be used to calculate air quality index |
 | Accelerometer      | 64        | 113        | 6 bytes  | 0.001 G Signed MSB per axis                         |
 
-
 3) Only location data formatted for the [Helium Mapper application](https://news.rakwireless.com/make-a-helium-mapper-with-the-wisblock/)    
 This data packet contains only raw data without any data markers.    
 **`4 byte latitude, 4 byte longitude, 2 byte altitude, 2 byte precision, 2 byte battery voltage`**

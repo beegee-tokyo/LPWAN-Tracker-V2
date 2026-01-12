@@ -6,24 +6,31 @@ This is the source code for the WisBlock Tracker Solution with RAK12500 or RAK12
 ## _REMARK 1_
 Recommended WisBlock modules
 - [WisBlock Starter Kit](https://store.rakwireless.com/collections/kits-bundles/products/wisblock-starter-kit)
+- alternative [WisMesh RAK4631 Starter Kit](https://store.rakwireless.com/collections/kits-bundles/products/wisblock-starter-kit) (with optional RAK12501 and RAK1910 modules) flashed with this firmware.
+- alternative [WisMesh Board ONE](https://store.rakwireless.com/products/wismesh-board-one-meshtastic-node) (with optional RAK12501 and OLED modules) flashed with this firmware.
+- alternative [WisMesh Base Board](https://store.rakwireless.com/products/wismesh-baseboard-rak19026) (with GNSS and OLED modules) flashed with this firmware.
 - [RAK12500](https://store.rakwireless.com/collections/wisblock-sensor/products/wisblock-gnss-location-module-rak12500)
 - alternative [RAK12501](https://store.rakwireless.com/products/wisblock-rak12501-gnss-module) WisBlock Sensor GNSS module
 - [RAK1904](https://store.rakwireless.com/collections/wisblock-sensor/products/rak1904-lis3dh-3-axis-acceleration-sensor)
 - optional [RAK1906](https://store.rakwireless.com/collections/wisblock-sensor/products/rak1906-bme680-environment-sensor)
-- [RAKBox-B2](https://store.rakwireless.com/collections/wisblock-enclosure/products/rakbox-b2-enclosure-with-solar-panel)
+- [Unify Enclosure with solar panel](https://store.rakwireless.com/products/unify-enclosure-ip65-100x75x38-solar) (For Wisblock Starter Kit and WisMesh RAK4631 Starter Kit)
+- alternative [3D printed enclosure for WisMesh Board ONE](https://makerworld.com/en/models/1631878-rakwireless-wismesh-board-one#profileId-1723640)
+- alternative [3D printed enclosure for WisMesh Pocket V2](https://makerworld.com/en/models/1678035-rakwireless-wismesh-pocket-mine#profileId-1777368)
 
 ## _REMARK 2_
 This example is using the [WisBlock API](https://github.com/beegee-tokyo/WisBlock-API) which helps to create low power consumption application and taking the load to handle communications from your shoulder.
 
 ----
 
-# Hardware used
+# Hardware used in PoC
 - [RAK4631](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK4631/Overview/) WisBlock Core module
-- [RAK5005-O](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK5005-O/Overview/) WisBlock Base board
-- [RAK12500](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12500/Overview/) WisBlock Sensor GNSS module
-- alternative [RAK12501](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12501/Overview/) WisBlock Sensor GNSS module
-- [RAK1904](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK1904/Overview/) WisBlock Sensor acceleration module
+- [RAK19007](https://docs.rakwireless.com/product-categories/wisblock/rak19007/overview/) WisBlock Base board
+- [RAK12501](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12501/Overview/) WisBlock Sensor GNSS module
+- alternative [RAK12500](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK12500/Overview/) WisBlock Sensor GNSS module
+- optional [RAK1904](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK1904/Overview/) WisBlock Sensor acceleration module
 - optional [RAK1906](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK1906/Overview/) WisBlock Sensor environment module
+
+Optional and alternative modules are tested as well.
 
 ## Power consumption
 The application does switch off the GPS module and the MCU and LoRa transceiver go into sleep mode between measurement cycles to save power. I could measure a sleep current of 40uA of the whole system. 
@@ -135,7 +142,10 @@ This data packet contains only raw data without any data markers.
 ## _REMARK_
 This application uses the RAK1904 acceleration sensor only for detection of movement to trigger the sending of a location packet, so the data packet does not include the accelerometer part by default. Accleration sensor data can be added with the ATC+ACC command.
 
-# Change data format
+----
+
+# Custom AT commands 
+## Change data format
 To switch between the three data modes, a custom AT command is implemented.    
 **`ATC+GNSS`**
 
@@ -175,7 +185,7 @@ ATC+GNSS=3
 +CME ERROR:5
 ```
 
-# Set location precision
+## Set location precision
 To change the reported GNSS acquisition precision, a custom AT command is implemented.    
 
 **`ATC+PREC`**
@@ -215,7 +225,7 @@ ATC+PREC=3
 +CME ERROR:5
 ```
 
-# Enable/Disable acceleration values in the payload
+## Enable/Disable acceleration values in the payload
 
 To enable or disable acceleration values in the payload, a custom AT command is implemented.    
 **`ATC+ACC`**
@@ -253,7 +263,7 @@ ATC+ACC=3
 +CME ERROR:5
 ```
 
-# List all found I2C modules
+## List all found I2C modules
 
 To list all connected modules, a custom AT command is implemented.    
 **`ATC+MOD`**
